@@ -24,4 +24,11 @@ def show_all(message):
     except:
          bot.send_message(message.chat.id,"пока пустая фильмотека))")
 
+@bot.message_handler(commands=['save'])
+def save_all(message):
+    with open("films.json","w",encoding="utf-8") as fh:  # режим 'w'
+        fh.write(json.dumps(films,ensure_ascii=False))
+    bot.send_message(message.chat.id,"Фильмотека сохранена в films.json")
+   
+
 bot.polling() # запуск бот-а, здесь спрятан 'while(True)'
